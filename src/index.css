@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ .pagebutton {
+  display: inline-block;
+  background-color: #8cc28e;
+  color: rgb(156, 40, 40);
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.post{
+  outline-style: solid;
+  outline-width: 1px;
+  padding-top: 10px;
+  border-radius: 4px;
+}

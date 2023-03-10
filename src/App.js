@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Pagination from "./Pagination";
 
 function App() {
+  const [data, setData] = useState([]);
+  const [perPage, setPerpage] = useState([]);
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
+      setData(res.data);
+      setPerpage(res.data.slice(0, 10));
+    });
+  }, []);
+  const pageHandler = (pageNumber) => {
+    setPerpage(data.slice(pageNumber * 10 - 10, pageNumber * 10));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {data.length >= 1 ? (
+        <div>
+          {perPage.map((post) => (
+            <div className="post">{post.title}</div>
+          ))}
+          <br></br>
+          <Pagination data={data} pageHandler={pageHandler} />
+        </div>
+      ) : (
+        <p>data not loaded</p>
+      )}
     </div>
   );
 }
